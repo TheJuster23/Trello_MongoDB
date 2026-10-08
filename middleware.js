@@ -16,7 +16,8 @@ function authMiddleware(req,res,next){
     // try {
     //     const decoded = jwt.verify(token, "thejus123");
     if(decoded.userId){
-        req.userId = parseInt(decoded.userId);
+        // Keep userId as a string to match Mongo ObjectId (or string) stored on todos
+        req.userId = decoded.userId;
         next()
     }
     else{
